@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
     def create
      
         @topic=Topic.find(params[:comment][:topic_id])
+        @topics = Topic.all.includes(:favorite_users)
         @comment = Comment.new(comment_params)
         @comment.user_id = current_user.id
         @comment.topic_id = @topic.id
@@ -9,7 +10,8 @@ class CommentsController < ApplicationController
             redirect_to request.referer, success:'コメントを投稿しました'
 
         else 
-            flash.now[:danger] = '投稿に失敗しました'
+            flash.now[:danger] = 'コメントに失敗しました'
+            render "topics/index"
         end
     end
 

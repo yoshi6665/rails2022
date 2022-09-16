@@ -22,8 +22,7 @@
             </p>
             <% topic.comments.each do |c| %>
                 <p class="topic-comments">
-                    <p><%= c.user.name%></p>
-                    <p><%= c.content %></p>
+                    <p><%= c.user.name%> <%= c.content %></p>
                 </p>
             <% end %>
             <%= form_for (@comment) do |f| %>
